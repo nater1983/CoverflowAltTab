@@ -152,7 +152,7 @@ var CoverflowSwitcher = class CoverflowSwitcher extends BaseSwitcher {
             this._setCurrentIndex(this._currentIndex - 1);
             this._updatePreviews(false);
         }
-    }
+    }flipStack
 
     _flipStack(direction) {
         //this._looping = true;
@@ -209,7 +209,7 @@ var CoverflowSwitcher = class CoverflowSwitcher extends BaseSwitcher {
         }
 
         //let animation_time = this._settings.animation_time * 2;
-        let animation_time = this._settings.animation_time * 2 * (direction === Direction.TO_RIGHT ? (index / this._previews.length) : (1 - index / this._previews.length));
+        let animation_time = this._settings.animation_time * 2 * (direction === Direction.TO_RIGHT ? ((index + 1) / this._previews.length) : (1 - index / this._previews.length));
         this._updatePreview(index, zeroIndexPreview, preview, index, false, animation_time);
         let translation_x;
         if (direction === Direction.TO_RIGHT) {
@@ -230,6 +230,7 @@ var CoverflowSwitcher = class CoverflowSwitcher extends BaseSwitcher {
             opacity: ALPHA * 255,
             time: animation_time,
         });
+        this._raiseIcons();
         //this._looping = false;
         //this._updatePreviews(false);
         return;
@@ -372,7 +373,7 @@ var CoverflowSwitcher = class CoverflowSwitcher extends BaseSwitcher {
             });
         }
         if (zeroIndexPreview != null) zeroIndexPreview.make_bottom_layer(this.previewActor);
-        super._updatePreviews();
+        this._raiseIcons();
         //this._setCurrentWindowTitle();
     }
 
